@@ -1,26 +1,301 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Vibe-a-thon Color Palette */
+    --vibe-red: 7 74% 41%; /* #A7372D */
+    --vibe-dark-red: 6 55% 32%; /* #802B24 */
+    --vibe-teal: 180 55% 39%; /* #2B9A9A */
+    --vibe-cream: 35 56% 90%; /* #F6EBD7 */
+    --vibe-orange: 25 68% 55%; /* #D85E41 */
+    --vibe-maroon: 5 58% 23%; /* #5E1C17 */
+    --vibe-mint: 174 53% 70%; /* #8ED9D2 */
+    --vibe-blush: 15 43% 77%; /* #E3B7A7 */
+    --vibe-dark: 0 0% 17%; /* #2C2C2C */
+    --vibe-light: 40 24% 91%; /* #EFE8DE */
+    
+    /* Theme Variables */
+    --background: var(--vibe-cream);
+    --foreground: var(--vibe-dark);
+    
+    --card: 0 0% 100%;
+    --card-foreground: var(--vibe-dark);
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: var(--vibe-dark);
+    
+    --primary: var(--vibe-teal);
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: var(--vibe-mint);
+    --secondary-foreground: var(--vibe-dark);
+    
+    --muted: var(--vibe-light);
+    --muted-foreground: 0 0% 40%;
+    
+    --accent: var(--vibe-blush);
+    --accent-foreground: var(--vibe-dark);
+    
+    --destructive: var(--vibe-red);
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: var(--vibe-mint);
+    --input: var(--vibe-mint);
+    --ring: var(--vibe-teal);
+    
+    --radius: 1rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  
+  /* Vibe-a-thon Custom Colors */
+  --color-vibe-red: #A7372D;
+  --color-vibe-dark-red: #802B24;
+  --color-vibe-teal: #2B9A9A;
+  --color-vibe-cream: #F6EBD7;
+  --color-vibe-orange: #D85E41;
+  --color-vibe-maroon: #5E1C17;
+  --color-vibe-mint: #8ED9D2;
+  --color-vibe-blush: #E3B7A7;
+  --color-vibe-dark: #2C2C2C;
+  --color-vibe-light: #EFE8DE;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    background: var(--color-vibe-cream);
+    color: var(--color-vibe-dark);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Brick Sans Font for Titles */
+.font-brick {
+  font-family: var(--font-brick-sans), system-ui, sans-serif;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(43, 154, 154, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(43, 154, 154, 0.6);
+  }
+}
+
+@keyframes bounce-soft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-bounce-soft {
+  animation: bounce-soft 2s ease-in-out infinite;
+}
+
+/* Chibi Style Decorations */
+.chibi-shadow {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.tech-gradient {
+  background: linear-gradient(135deg, #2B9A9A 0%, #8ED9D2 100%);
+}
+
+.warm-gradient {
+  background: linear-gradient(135deg, #A7372D 0%, #D85E41 100%);
+}
+
+/* Circuit Pattern Background */
+.circuit-pattern {
+  background-image: 
+    radial-gradient(circle at 25px 25px, rgba(142, 217, 210, 0.3) 2px, transparent 0),
+    radial-gradient(circle at 75px 75px, rgba(43, 154, 154, 0.2) 2px, transparent 0);
+  background-size: 100px 100px;
+}
+
+/* Grid Background Pattern */
+.grid-background {
+  background-size: 40px 40px;
+  background-image:
+    linear-gradient(to right, rgba(43, 154, 154, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(43, 154, 154, 0.1) 1px, transparent 1px);
+}
+
+/* Grid Background with Dots */
+.grid-dots-background {
+  background-size: 30px 30px;
+  background-image:
+    radial-gradient(circle, rgba(43, 154, 154, 0.15) 1px, transparent 1px);
+}
+
+/* Tech Grid Background - Combined */
+.tech-grid-background {
+  background-color: #F6EBD7;
+  background-image:
+    linear-gradient(rgba(43, 154, 154, 0.08) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(43, 154, 154, 0.08) 2px, transparent 2px);
+  background-size: 80px 80px;
+  background-position: -2px -2px;
+}
+
+/* Glassmorphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Form Section Styling */
+.form-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.form-section::before {
+  content: '';
+  position: absolute;
+  top: -5rem;
+  right: -5rem;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 9999px;
+  opacity: 0.1;
+  background: #2B9A9A;
+}
+
+/* Progress Bar */
+.progress-step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.875rem;
+  transition: all 300ms;
+}
+
+.progress-step.active {
+  background: #2B9A9A;
+  color: white;
+  transform: scale(1.1);
+}
+
+.progress-step.completed {
+  background: #8ED9D2;
+  color: #2C2C2C;
+}
+
+.progress-step.inactive {
+  background: #EFE8DE;
+  color: rgba(44, 44, 44, 0.5);
+}
+
+/* Mascot Container */
+.mascot-container {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EFE8DE;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2B9A9A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #802B24;
+}
+
+/* Focus Styles for Accessibility */
+*:focus-visible {
+  outline: 2px solid #2B9A9A;
+  outline-offset: 2px;
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip Link for Accessibility */
+.skip-link {
+  position: absolute;
+  top: -2.5rem;
+  left: 0;
+  background: #2B9A9A;
+  color: white;
+  padding: 0.5rem 1rem;
+  z-index: 50;
+  transition: all 200ms;
+}
+
+.skip-link:focus {
+  top: 0;
 }
